@@ -20,11 +20,20 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import io
+import gdown
 
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 # Load model
 MODEL_PATH = "best_mobilenet_cifar10.h5"
+GDRIVE_ID = "1aH_d0HNxSEwDdOWVoGzZEe-Pz2c0G3Bi"
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from Google Drive...")
+    gdown.download(
+        f"https://drive.google.com/uc?id={GDRIVE_ID}",
+        MODEL_PATH,
+        quiet=False
+    )
 model = tf.keras.models.load_model(
     MODEL_PATH,
     compile=False,
